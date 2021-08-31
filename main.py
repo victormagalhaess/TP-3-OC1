@@ -33,6 +33,14 @@ correspondem a 4 palavras de 32 bits, que resultam em 128 bits no total.
 – Sua cache utiliza Mapeamento Direto para alocar os blocos.
 – Para operações de escrita na memória você deve utilizar a técnica de Write Back.
 – Os endereços que a CPU fornece contém 32 bits.
+
+                 |          |
+                 |          |
+                       |
+                       |>
+
+                  \_________/
+
 '''
 
 def readFile():
