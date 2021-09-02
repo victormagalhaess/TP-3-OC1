@@ -7,7 +7,7 @@ class Memory:
         for index in range(self.numberOfWords):
             word = {
                 'index': '{0:010b}'.format(index),
-                'data': '' #tecnicamente só pode armazenar 32 bits
+                'data': [] # tecnicamente só pode armazenar 32 bits
             }
             self.words.append(word)
     
