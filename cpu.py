@@ -1,11 +1,10 @@
 class Cpu:
-    def __init__(self, cache, memory):
+    def __init__(self, cache):
         self.reads = 0
         self.writes = 0
         self.hits = 0
         self.misses = 0
         self.cache = cache
-        self.memory = memory
 
     def process(self, instruction):
         if (instruction.isOpWrite()):

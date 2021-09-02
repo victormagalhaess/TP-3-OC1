@@ -42,7 +42,7 @@ def main():
     closeFile(file)
     memory = Memory()
     cache = Cache(memory)
-    cpu = Cpu(cache, memory)
+    cpu = Cpu(cache)
 
     for instruction in instructions:
         cpu.process(instruction)
