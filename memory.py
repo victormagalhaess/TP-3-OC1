@@ -1,13 +1,13 @@
 class Memory:
     def __init__(self):
         # 1024 @ 32 bits
-        self.byteOffset = 4  # ainda não sei exatamente pq, mas tal qual slide da aula de memória
+        self.byteOffset = 4
         self.numberOfWords = 1024
         self.words = []
         for index in range(self.numberOfWords):
             word = {
                 'index': '{0:010b}'.format(index),
-                'data': []  # tecnicamente só pode armazenar 32 bits
+                'data': []
             }
             self.words.append(word)
 

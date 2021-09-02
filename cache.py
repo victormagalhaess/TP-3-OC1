@@ -22,10 +22,8 @@ class Cache:
             self.blocks.append(block)
 
     def read(self, address):
-        blockIndex = (address >> (self.byteOffset +
-                      self.wordOffset)) % (1 << self.indexSize)
+        blockIndex = (address >> (self.byteOffset + self.wordOffset)) % (1 << self.indexSize)
         tag = address >> (self.byteOffset + self.wordOffset + self.indexSize)
-        # todo
         readingBlock = self.blocks[blockIndex]
         if readingBlock['valid'] and readingBlock['tag'] == tag:
             return True  # hit
@@ -55,10 +53,8 @@ class Cache:
 
     def write(self, address, data):
         newWordIndex = (address >> self.byteOffset) % (1 << self.wordOffset)
-        blockIndex = (address >> (self.byteOffset +
-                      self.wordOffset)) % (1 << self.indexSize)
+        blockIndex = (address >> (self.byteOffset + self.wordOffset)) % (1 << self.indexSize)
         tag = address >> (self.byteOffset + self.wordOffset + self.indexSize)
-        # todo
         writingBlock = self.blocks[blockIndex]
         if writingBlock['valid'] and writingBlock['tag'] == tag:
             writingBlock['data'][newWordIndex] = data

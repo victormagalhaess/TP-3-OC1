@@ -21,7 +21,6 @@ class Cpu:
             else:
                 instruction.result = "M"
                 self.misses += 1
-            # add logic to check hit and miss
 
     def getMissRate(self):
         return str(round(self.misses/self.reads, 3))
