@@ -64,10 +64,36 @@ class Cache:
 
 
     def write(self, address, data):
-        wordIndex = (address >> self.byteOffset) % (1 << self.wordOffset)
+        newWordIndex = (address >> self.byteOffset) % (1 << self.wordOffset)
         blockIndex = (address >> (self.byteOffset + self.wordOffset)) % (1 << self.indexSize)
         tag = address >> (self.byteOffset + self.wordOffset + self.indexSize)
         #todo
-        
+        writingBlock = self.blocks[blockIndex]
+        if writingBlock['valid'] and writingBlock['tag'] == tag:
+            writingBlock['data'][newWordIndex] = data
+            writingBlock['dirty'] = True
+        else: 
+            if writingBlock['dirty']:
+                for wordIndex, word in enumerate(writingBlock['data']):
+                    dirtyAddress = writingBlock['tag']
+                    dirtyAddress = dirtyAddress << (self.byteOffset + self.wordOffset + self.indexSize)
+                    dirtyAddress += blockIndex << (self.byteOffset + self.wordOffset)
+                    dirtyAddress += wordIndex << self.wordOffset
+                    dirtyAddress += address % (1 << self.byteOffset)
+                    self.memory.write(dirtyAddress, writingBlock['data'][wordIndex])
 
-        
+            writingBlock['valid'] = True
+            writingBlock['dirty'] = False
+            writingBlock['tag'] = tag
+            for wordIndex, word in enumerate(writingBlock['data']):
+                if wordIndex == newWordIndex:
+                    writingBlock['data'][wordIndex] = data
+                    continue
+
+                newAddress = address >> (self.byteOffset + self.wordOffset)
+                newAddress = newAddress << self.wordOffset
+                newAddress += wordIndex
+                newAddress = newAddress << self.byteOffset
+                newAddress += address % (1 << self.byteOffset)  
+                writingBlock['data'][wordIndex] = self.memory.read(newAddress)
+
