@@ -29,12 +29,8 @@ def getInstructions(file):
 
 def assembleResponse(instructions, cpu):
     with open("result.txt", "w") as result:
-        result.write("""READS: {}
-WRITES: {}
-HITS: {}
-MISSES: {}
-HIT RATE: {}
-MISS RATE: {}\n\n""".format(cpu.reads, cpu.writes, cpu.hits, cpu.misses, cpu.getHitRate(), cpu.getMissRate()))
+        result.write("""READS: {}\nWRITES: {}\nHITS: {}\nMISSES: {}\nHIT RATE: {}\nMISS RATE: {}\n\n""".format(
+            cpu.reads, cpu.writes, cpu.hits, cpu.misses, cpu.getHitRate(), cpu.getMissRate()))
         for instruction in instructions:
             result.write("{} {} {} {}\n".format(instruction.adr,
                          instruction.op, instruction.data, instruction.result))
