@@ -8,7 +8,7 @@ class Cpu:
         self.missRate = 0
         self.cache = cache
         self.memory = memory
-    
+
     def process(self, instruction):
         if (instruction.isOpWrite()):
             self.writes += 1
@@ -21,4 +21,4 @@ class Cpu:
                 instruction.result = "H"
             else:
                 instruction.result = "M"
-            #add logic to check hit and miss
+            # add logic to check hit and miss

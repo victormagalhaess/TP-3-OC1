@@ -3,9 +3,11 @@ from cache import Cache
 from memory import Memory
 from cpu import Cpu
 
+
 def readFile():
     file = open("in.txt", "r")
     return file
+
 
 def getInstructions(file):
     instructions = []
@@ -20,8 +22,10 @@ def getInstructions(file):
         instructions.append(Instruction(adr, op, data))
     return instructions
 
+
 def closeFile(file):
     file.close()
+
 
 def assembleResponse(instructions, cpu):
     with open("result.txt", "w") as result:
@@ -32,7 +36,9 @@ MISSES: {}
 HIT RATE: {}
 MISS RATE: {}\n\n""".format(cpu.reads, cpu.writes, cpu.hits, cpu.misses, cpu.hitRate, cpu.missRate))
         for instruction in instructions:
-            result.write("{} {} {} {}\n".format(instruction.adr, instruction.op, instruction.data, instruction.result))
+            result.write("{} {} {} {}\n".format(instruction.adr,
+                         instruction.op, instruction.data, instruction.result))
+
 
 def main():
     file = readFile()
