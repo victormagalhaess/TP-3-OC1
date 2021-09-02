@@ -33,20 +33,17 @@ class Cache:
             if readingBlock['dirty']:
                 for wordIndex, word in enumerate(readingBlock['data']):
                     dirtyAddress = readingBlock['tag']
-                    dirtyAddress = dirtyAddress << (
-                        self.byteOffset + self.wordOffset + self.indexSize)
-                    dirtyAddress += blockIndex << (
-                        self.byteOffset + self.wordOffset)
+                    dirtyAddress = dirtyAddress << (self.byteOffset + self.wordOffset + self.indexSize)
+                    dirtyAddress += blockIndex << (self.byteOffset + self.wordOffset)
                     dirtyAddress += wordIndex << self.wordOffset
                     dirtyAddress += address % (1 << self.byteOffset)
-                    self.memory.write(
-                        dirtyAddress, readingBlock['data'][wordIndex])
+                    self.memory.write(dirtyAddress, readingBlock['data'][wordIndex])
 
             readingBlock['valid'] = True
             readingBlock['dirty'] = False
             readingBlock['tag'] = tag
 
-            for wordIndex, word in enumerate(readingBlock['data']):
+            for wordIndex, _ in enumerate(readingBlock['data']):
                 newAddress = address >> (self.byteOffset + self.wordOffset)
                 newAddress = newAddress << self.wordOffset
                 newAddress += wordIndex
@@ -68,16 +65,13 @@ class Cache:
             writingBlock['dirty'] = True
         else:
             if writingBlock['dirty']:
-                for wordIndex, word in enumerate(writingBlock['data']):
+                for wordIndex, _ in enumerate(writingBlock['data']):
                     dirtyAddress = writingBlock['tag']
-                    dirtyAddress = dirtyAddress << (
-                        self.byteOffset + self.wordOffset + self.indexSize)
-                    dirtyAddress += blockIndex << (
-                        self.byteOffset + self.wordOffset)
+                    dirtyAddress = dirtyAddress << (self.byteOffset + self.wordOffset + self.indexSize)
+                    dirtyAddress += blockIndex << (self.byteOffset + self.wordOffset)
                     dirtyAddress += wordIndex << self.wordOffset
                     dirtyAddress += address % (1 << self.byteOffset)
-                    self.memory.write(
-                        dirtyAddress, writingBlock['data'][wordIndex])
+                    self.memory.write(dirtyAddress, writingBlock['data'][wordIndex])
 
             writingBlock['valid'] = True
             writingBlock['dirty'] = False

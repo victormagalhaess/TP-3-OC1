@@ -9,6 +9,10 @@ def readFile():
     return file
 
 
+def closeFile(file):
+    file.close()
+
+
 def getInstructions(file):
     instructions = []
     for line in file:
@@ -21,10 +25,6 @@ def getInstructions(file):
             data = rawData[2]
         instructions.append(Instruction(adr, op, data))
     return instructions
-
-
-def closeFile(file):
-    file.close()
 
 
 def assembleResponse(instructions, cpu):
