@@ -24,7 +24,7 @@ class Cpu:
             # add logic to check hit and miss
 
     def getMissRate(self):
-        return str(self.misses/self.reads)
+        return str(round(self.misses/self.reads, 3))
 
     def getHitRate(self):
-        return str(self.hits/self.reads)
+        return str(round(self.hits/self.reads, 3))
