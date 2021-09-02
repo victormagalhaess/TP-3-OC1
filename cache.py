@@ -21,11 +21,6 @@ class Cache:
             }
             self.blocks.append(block)
 
-    def findMapping(self, address):
-        blockAdr = math.floor(address/self.blockSize)
-        blockNumber = blockAdr % self.numberOfBlocks
-        return blockNumber
-
     def read(self, address):
         blockIndex = (address >> (self.byteOffset +
                       self.wordOffset)) % (1 << self.indexSize)
@@ -87,7 +82,7 @@ class Cache:
             writingBlock['valid'] = True
             writingBlock['dirty'] = False
             writingBlock['tag'] = tag
-            for wordIndex, word in enumerate(writingBlock['data']):
+            for wordIndex, _ in enumerate(writingBlock['data']):
                 if wordIndex == newWordIndex:
                     writingBlock['data'][wordIndex] = data
                     continue

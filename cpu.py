@@ -4,8 +4,6 @@ class Cpu:
         self.writes = 0
         self.hits = 0
         self.misses = 0
-        self.hitRate = 0
-        self.missRate = 0
         self.cache = cache
         self.memory = memory
 
@@ -19,6 +17,14 @@ class Cpu:
             result = self.cache.read(instruction.adr)
             if(result):
                 instruction.result = "H"
+                self.hits += 1
             else:
                 instruction.result = "M"
+                self.misses += 1
             # add logic to check hit and miss
+
+    def getMissRate(self):
+        return str(self.misses/self.reads)
+
+    def getHitRate(self):
+        return str(self.hits/self.reads)

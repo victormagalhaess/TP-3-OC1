@@ -34,7 +34,7 @@ WRITES: {}
 HITS: {}
 MISSES: {}
 HIT RATE: {}
-MISS RATE: {}\n\n""".format(cpu.reads, cpu.writes, cpu.hits, cpu.misses, cpu.hitRate, cpu.missRate))
+MISS RATE: {}\n\n""".format(cpu.reads, cpu.writes, cpu.hits, cpu.misses, cpu.getHitRate(), cpu.getMissRate()))
         for instruction in instructions:
             result.write("{} {} {} {}\n".format(instruction.adr,
                          instruction.op, instruction.data, instruction.result))
@@ -52,11 +52,6 @@ def main():
         cpu.process(instruction)
 
     assembleResponse(instructions, cpu)
-
-    memory.write(20, "teste")
-    print(memory.read(20))
-
-    print(cache.findMapping(1200))
 
 
 if __name__ == '__main__':
